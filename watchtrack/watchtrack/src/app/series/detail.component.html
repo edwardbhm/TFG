@@ -1,0 +1,23 @@
+<app-header></app-header>
+<div class="detail-container" *ngIf="series">
+    <h2 class="titulos">{{ series.name }}</h2>
+  
+    <div class="detail-content">
+      <div class="poster-container">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="Series Poster">
+      </div>
+  
+      <div class="movie-info">
+        <p><strong>Primera emisión:</strong> {{ series.first_air_date }}</p>
+        <p><strong>Género:</strong> {{ genres }}</p>
+        <p><strong>Temporadas:</strong> {{ series.number_of_seasons }}</p>
+        <p><strong>Episodios:</strong> {{ series.number_of_episodes }}</p>
+        <p><strong>Puntuación:</strong> ⭐ {{ series.vote_average }} / 10</p>
+        <p><strong>Idioma Original:</strong> {{ series.original_language }}</p>
+        <p><strong>Sinopsis:</strong> {{ series.overview }}</p>
+  
+        <button (click)="goBack()" class="btn-volver">Volver</button>
+      </div>
+    </div>
+  </div>
+  

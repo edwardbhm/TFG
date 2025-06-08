@@ -1,0 +1,70 @@
+body {
+    background-color: #FEE0E0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .titulos {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 50px;
+    margin: 1rem 0 0 1rem;
+  }
+  
+  .detail-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .detail-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .poster-container img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .movie-info {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .movie-info p {
+    margin-bottom: 10px;
+  }
+  
+  .btn-volver {
+    background-color: #f1c4c4;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-top: 1rem;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-volver:hover {
+    background-color: #f09595;
+  }
+  
+  .background-rollo {
+    background-image: url('/assets/rollo.png');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 40%;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  

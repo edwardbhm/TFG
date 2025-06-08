@@ -1,0 +1,19 @@
+<app-header></app-header>
+
+<h2>🎬 Películas vistas</h2>
+<div class="grid">
+  <div *ngFor="let peli of vistas" class="card" (click)="verDetalle(peli.pelicula.tmdbId)">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + peli.pelicula.imagen" alt="{{ peli.pelicula.titulo }}">
+    <p>{{ peli.pelicula.titulo }}</p>
+  </div>
+</div>
+<ng-template #noVistas><p>No hay películas vistas.</p></ng-template>
+
+<h2>🕒 Películas pendientes</h2>
+<div class="grid">
+  <div *ngFor="let peli of pendientes" class="card" (click)="verDetalle(peli.pelicula.tmdbId)">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + peli.pelicula.imagen" alt="{{ peli.pelicula.titulo }}">
+    <p>{{ peli.pelicula.titulo }}</p>
+  </div>
+</div>
+<ng-template #noPendientes><p>No hay películas pendientes.</p></ng-template>

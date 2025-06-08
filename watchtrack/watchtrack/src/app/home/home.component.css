@@ -1,0 +1,37 @@
+h2 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 0 20px 40px;
+}
+
+.media-card {
+  background-color: #ffe6f0;
+  border-radius: 12px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.media-card:hover {
+  transform: scale(1.03);
+}
+
+mat-card-title {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #222;
+}
+
+mat-card-content p {
+  font-size: 14px;
+  color: #444;
+}

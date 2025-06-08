@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<mat-card class="center-card">
+  <h2>Mi Perfil</h2>
+
+  <form [formGroup]="perfilForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <button *ngIf="!editando" mat-raised-button color="primary" (click)="activarEdicion()">
+      Editar perfil
+    </button>
+
+    <button *ngIf="editando" mat-raised-button color="accent" (click)="guardarCambios()">
+      Guardar cambios
+    </button>
+  </form>
+</mat-card>

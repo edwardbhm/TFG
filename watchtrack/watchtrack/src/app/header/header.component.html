@@ -1,0 +1,38 @@
+<div class="header-bar">
+  <span class="logo-text" (click)="goToHome()" style="cursor: pointer;">🎬 WatchTrack</span>
+
+  <!-- Buscador alineado a la derecha -->
+  <form (submit)="onSearch()" style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
+    <mat-form-field appearance="outline" class="search-box">
+      <mat-label>Buscar</mat-label>
+      <input matInput [(ngModel)]="searchQuery" name="searchQuery">
+    </mat-form-field>
+    <button mat-icon-button color="primary" type="submit">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+
+  <!-- Menú de usuario -->
+  <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-icon">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="goToPerfil()">
+      <mat-icon>person</mat-icon>
+      <span>Perfil</span>
+    </button>
+    <button mat-menu-item (click)="goToLista()">
+      <mat-icon>playlist_add_check</mat-icon>
+      <span>Mi lista</span>
+    </button>
+    <button mat-menu-item (click)="goToHome()">
+      <mat-icon>home</mat-icon>
+      <span>Inicio</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
+  </mat-menu>
+</div>

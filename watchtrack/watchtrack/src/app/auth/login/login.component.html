@@ -1,0 +1,21 @@
+<mat-card class="center-card">
+    <h2>Iniciar sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Entrar</button>
+      <button mat-button color="primary" (click)="goToRegister()">¿No tienes cuenta? Regístrate</button>
+
+    </form>
+  
+    <p *ngIf="message">{{ message }}</p>
+  </mat-card>
+  

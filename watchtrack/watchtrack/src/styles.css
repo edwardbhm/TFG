@@ -1,0 +1,46 @@
+:root {
+    --primary-color: #f8bbd0; /* Rosa pastel */
+    --secondary-color: #f48fb1;
+    --text-color: #333;
+    --background-color: #fff0f5; /* Fondo general suave */
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    background-image: url('/assets/rollo.png');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 40%;
+    background-attachment: fixed;
+  }
+  
+  /* Centrado de las tarjetas (formularios) */
+  .center-card {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  /* Personaliza las tarjetas */
+  mat-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Botones */
+  button {
+    width: 100%;
+    margin-top: 3px;
+  }
+  
+  /* Inputs */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
