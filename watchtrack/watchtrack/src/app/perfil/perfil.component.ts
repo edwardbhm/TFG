@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from '../header/header.component';
 import { PerfilService } from '../services/perfil.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',
@@ -16,6 +17,7 @@ import { PerfilService } from '../services/perfil.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -27,35 +29,38 @@ export class PerfilComponent implements OnInit {
   perfilForm!: FormGroup;
   editando = false;
 
+  nuevaContrasena: string = '';
+confirmarContrasena: string = '';
+mostrarFormularioContrasena = false;
+
+
   constructor(private fb: FormBuilder, private perfilService: PerfilService) {}
 
   ngOnInit(): void {
-  this.perfilForm = this.fb.group({
-    nombre: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]]
-  });
-
-  this.perfilForm.disable();
-
-  // 👇 Solo llamar al servicio si estamos en el navegador
-  if (typeof window !== 'undefined') {
-    this.perfilService.getPerfil().subscribe({
-      next: (datos) => {
-        this.perfilForm.patchValue({
-          nombre: datos.nombre,
-          email: datos.email
-        });
-      },
-      error: () => {
-        this.perfilForm.patchValue({
-          nombre: 'Nombre no disponible',
-          email: 'Email no disponible'
-        });
-      }
+    this.perfilForm = this.fb.group({
+      nombre: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
     });
-  }
-}
 
+    this.perfilForm.disable();
+
+    if (typeof window !== 'undefined') {
+      this.perfilService.getPerfil().subscribe({
+        next: (datos) => {
+          this.perfilForm.patchValue({
+            nombre: datos.nombre,
+            email: datos.email
+          });
+        },
+        error: () => {
+          this.perfilForm.patchValue({
+            nombre: 'Nombre no disponible',
+            email: 'Email no disponible'
+          });
+        }
+      });
+    }
+  }
 
   activarEdicion() {
     this.editando = true;
@@ -76,4 +81,31 @@ export class PerfilComponent implements OnInit {
       });
     }
   }
+
+ cambiarContrasena(): void {
+  if (!this.nuevaContrasena.trim() || !this.confirmarContrasena.trim()) {
+    alert('Por favor completa ambos campos de contraseña');
+    return;
+  }
+
+  if (this.nuevaContrasena !== this.confirmarContrasena) {
+    alert('Las contraseñas no coinciden');
+    return;
+  }
+
+  this.perfilService.cambiarContrasena(this.nuevaContrasena).subscribe({
+    next: () => {
+      alert('✅ Contraseña actualizada correctamente');
+      this.nuevaContrasena = '';
+      this.confirmarContrasena = '';
+      this.mostrarFormularioContrasena = false;
+    },
+    error: (error) => {
+      console.error('Error real:', error);
+      alert('❌ Error al actualizar la contraseña');
+    }
+  });
+}
+
+
 }

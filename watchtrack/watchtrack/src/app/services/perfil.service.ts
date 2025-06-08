@@ -30,4 +30,20 @@ export class PerfilService {
       headers: this.getAuthHeaders()
     });
   }
+
+cambiarContrasena(password: string): Observable<any> {
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`  // 👈 IMPORTANTE
+  });
+
+  return this.http.put(`${this.apiUrl}/${userId}/password`, { password }, { headers });
+}
+
+
+
+
 }
