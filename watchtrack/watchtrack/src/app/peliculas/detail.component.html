@@ -23,6 +23,10 @@
         <button mat-raised-button color="accent" (click)="guardarEstado('POR_VER')" [disabled]="estadoActual === 'POR_VER' || guardando">
           Marcar como pendiente
         </button>
+        <button mat-raised-button color="warn" (click)="eliminarDeLista()" [disabled]="guardando || !estadoActual">
+          Eliminar de mi lista
+        </button>
+
       </div>
 
       <button (click)="goBack()" class="btn-volver" style="margin-top: 1rem;">Volver</button>

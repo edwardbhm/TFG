@@ -1,23 +1,39 @@
 <app-header></app-header>
-<div class="detail-container" *ngIf="series">
-    <h2 class="titulos">{{ series.name }}</h2>
-  
-    <div class="detail-content">
-      <div class="poster-container">
-        <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="Series Poster">
+
+<div class="detail-container background-rollo" *ngIf="series">
+  <h2 class="titulos">{{ series.name }}</h2>
+
+  <div class="detail-content">
+    <div class="poster-container">
+      <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="Series Poster">
+    </div>
+
+    <div class="movie-info">
+      <p><strong>Primera emisión:</strong> {{ series.first_air_date }}</p>
+      <p><strong>Género:</strong> {{ genres }}</p>
+      <p><strong>Temporadas:</strong> {{ series.number_of_seasons }}</p>
+      <p><strong>Episodios:</strong> {{ series.number_of_episodes }}</p>
+      <p><strong>Puntuación:</strong> ⭐ {{ series.vote_average }} / 10</p>
+      <p><strong>Idioma Original:</strong> {{ series.original_language }}</p>
+      <p><strong>Sinopsis:</strong> {{ series.overview }}</p>
+
+      <div style="margin-top: 1rem;">
+        <button mat-raised-button color="primary" (click)="guardarEstado('VISTA')" [disabled]="estadoActual === 'VISTA' || guardando">
+          Marcar como vista
+        </button>
+        <button mat-raised-button color="accent" (click)="guardarEstado('POR_VER')" [disabled]="estadoActual === 'POR_VER' || guardando">
+          Marcar como pendiente
+        </button>
+        <button mat-raised-button color="warn" (click)="guardarEstado('VIENDO')" [disabled]="estadoActual === 'VIENDO' || guardando">
+          Viendo actualmente
+        </button>
+        <button mat-raised-button color="warn" (click)="eliminarSerie()" [disabled]="guardando || !estadoActual">
+          Eliminar de mi lista
+        </button>
+        
       </div>
-  
-      <div class="movie-info">
-        <p><strong>Primera emisión:</strong> {{ series.first_air_date }}</p>
-        <p><strong>Género:</strong> {{ genres }}</p>
-        <p><strong>Temporadas:</strong> {{ series.number_of_seasons }}</p>
-        <p><strong>Episodios:</strong> {{ series.number_of_episodes }}</p>
-        <p><strong>Puntuación:</strong> ⭐ {{ series.vote_average }} / 10</p>
-        <p><strong>Idioma Original:</strong> {{ series.original_language }}</p>
-        <p><strong>Sinopsis:</strong> {{ series.overview }}</p>
-  
-        <button (click)="goBack()" class="btn-volver">Volver</button>
-      </div>
+
+      <button (click)="goBack()" class="btn-volver" style="margin-top: 1rem;">Volver</button>
     </div>
   </div>
-  
+</div>

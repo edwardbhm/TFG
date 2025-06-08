@@ -74,7 +74,30 @@ export class DetailComponent implements OnInit {
 }
 
 
+eliminarDeLista() {
+  if (!this.userId || !this.movie?.id) return;
 
+  this.guardando = true;
+
+  this.usuarioPeliculaService.eliminarPelicula(this.userId, this.movie.id).subscribe({
+    next: (res) => {
+      console.log('✅ Película eliminada correctamente:', res);
+      this.estadoActual = null;
+      this.guardando = false;
+      location.reload(); // recarga para reflejar el cambio en el botón
+    },
+    error: (error) => {
+      console.error('❌ Error real al eliminar película:', error);
+      if (error?.message && error.message !== 'Error al eliminar película') {
+        alert('Error al eliminar de la lista');
+      }
+      this.guardando = false;
+    }
+  });
+  window.location.reload();
+}
+
+        
   goBack(): void {
     this.router.navigate(['/home']);
   }

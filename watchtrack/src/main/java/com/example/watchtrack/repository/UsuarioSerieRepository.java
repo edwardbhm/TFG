@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioSerieRepository extends JpaRepository<UsuarioSerie, Long> {
-    List<UsuarioSerie> findByUsuarioId(Long usuarioId);
-    Optional<UsuarioSerie> findByUsuarioIdAndSerieId(Long usuarioId, Long serieId);
+    List<UsuarioSerie> findByUsuario_Id(Long usuarioId);
+    Optional<UsuarioSerie> findByUsuario_IdAndSerie_TmdbId(Long usuarioId, Long tmdbId);
 }

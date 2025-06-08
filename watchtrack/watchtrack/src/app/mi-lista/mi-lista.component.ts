@@ -5,6 +5,8 @@ import { HeaderComponent } from '../header/header.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { UsuarioSerieService } from '../services/usuario-serie.service';
+
 
 @Component({
   selector: 'app-mi-lista',
@@ -15,11 +17,17 @@ import { Router } from '@angular/router';
 })
 export class MiListaComponent implements OnInit {
   userId: number | null = null;
+
   vistas: any[] = [];
   pendientes: any[] = [];
 
+  vistasSeries: any[] = [];
+  pendientesSeries: any[] = [];
+  viendoSeries: any[] = [];
+
   constructor(
     private usuarioPeliculaService: UsuarioPeliculaService,
+    private usuarioSerieService: UsuarioSerieService,
     private router: Router
   ) {}
 
@@ -33,10 +41,20 @@ export class MiListaComponent implements OnInit {
         this.vistas = peliculas.filter(p => p.estado === 'VISTA');
         this.pendientes = peliculas.filter(p => p.estado === 'POR_VER');
       });
+
+      this.usuarioSerieService.obtenerSeries(this.userId).subscribe(series => {
+        this.vistasSeries = series.filter(s => s.estado === 'VISTA');
+        this.pendientesSeries = series.filter(s => s.estado === 'POR_VER');
+        this.viendoSeries = series.filter(s => s.estado === 'VIENDO');
+      });
     }
   }
 
-  verDetalle(tmdbId: number): void {
+  verDetallePelicula(tmdbId: number): void {
     this.router.navigate(['/peliculas', tmdbId]);
+  }
+
+  verDetalleSerie(tmdbId: number): void {
+    this.router.navigate(['/series', tmdbId]);
   }
 }
