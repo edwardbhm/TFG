@@ -30,13 +30,15 @@ export class PerfilComponent implements OnInit {
   constructor(private fb: FormBuilder, private perfilService: PerfilService) {}
 
   ngOnInit(): void {
-    this.perfilForm = this.fb.group({
-      nombre: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
-    });
+  this.perfilForm = this.fb.group({
+    nombre: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]]
+  });
 
-    this.perfilForm.disable();
+  this.perfilForm.disable();
 
+  // 👇 Solo llamar al servicio si estamos en el navegador
+  if (typeof window !== 'undefined') {
     this.perfilService.getPerfil().subscribe({
       next: (datos) => {
         this.perfilForm.patchValue({
@@ -52,6 +54,8 @@ export class PerfilComponent implements OnInit {
       }
     });
   }
+}
+
 
   activarEdicion() {
     this.editando = true;
