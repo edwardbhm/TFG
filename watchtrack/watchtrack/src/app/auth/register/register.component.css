@@ -1,0 +1,65 @@
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background-color: #e88c8c;
+  height: 64px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: xx-large;
+  color: white;
+  text-decoration: none;
+}
+
+/* Centrar texto "Bienvenido a WatchTrack" */
+.welcome-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: white;
+}
+
+/* Botones alineados */
+.auth-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Contenido */
+.contenido-principal {
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.card {
+  width: 140px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.card img:hover {
+  transform: scale(1.05);
+}

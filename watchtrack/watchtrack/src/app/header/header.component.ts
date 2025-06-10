@@ -42,7 +42,7 @@ export class HeaderComponent {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/inicio']);
   }
 
   onSearch(): void {

@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
+import { HeaderPublicoComponent } from '../../shared/header-publico/header-publico.component';
+
 
 @Component({
   selector: 'app-register',
@@ -20,7 +22,8 @@ import { jwtDecode } from 'jwt-decode';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    HeaderPublicoComponent
   ],
   templateUrl: './register.component.html'
 })
@@ -92,5 +95,12 @@ export class RegisterComponent {
         this.message = 'Error en registro ❌';
       }
     });
+  }
+   irALogin() {
+    this.router.navigate(['/auth/login']);
+  }
+
+  irARegistro() {
+    this.router.navigate(['/auth/register']);
   }
 }

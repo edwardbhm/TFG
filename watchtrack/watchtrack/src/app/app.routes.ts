@@ -37,5 +37,13 @@ export const routes: Routes = [
     path: 'series/:id',
     loadComponent: () => import('./series/detail.component').then(m => m.DetailComponent)
   },
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' }
+  {
+    path: 'inicio',
+    loadComponent: () => import('./inicio-publico/inicio-publico.component').then(m => m.InicioPublicoComponent)
+  },
+  {
+    path: '',
+    redirectTo: '/inicio',
+    pathMatch: 'full'
+  }
 ];

@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from '../header/header.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -39,6 +40,17 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Detectar navegación a /home y recargar
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        if (event.url === '/home') {
+          this.clearSearch();
+          this.loadPopularContent();
+        }
+      });
+
+    // Buscar si hay query params de búsqueda
     this.route.queryParams.subscribe(params => {
       const query = params['search'];
       if (query) {
@@ -52,11 +64,11 @@ export class HomeComponent implements OnInit {
 
   loadPopularContent(): void {
     this.tmdbService.getPopularMovies().subscribe(data => {
-      this.popularMovies = data.results;
+      this.popularMovies = data.results.slice(0, 18); // ✅ limitamos a 18
     });
 
     this.tmdbService.getPopularSeries().subscribe(data => {
-      this.popularSeries = data.results;
+      this.popularSeries = data.results.slice(0, 18); // ✅ limitamos a 18
     });
   }
 
@@ -73,6 +85,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.searchResultsMovies = [];
+    this.searchResultsSeries = [];
+  }
+
   goToMovie(id: number): void {
     this.router.navigate(['/peliculas', id]);
   }
@@ -83,6 +101,6 @@ export class HomeComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/inicio']);
   }
 }

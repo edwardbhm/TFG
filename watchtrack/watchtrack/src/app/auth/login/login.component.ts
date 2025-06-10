@@ -8,7 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { jwtDecode } from 'jwt-decode';  // ✅ Versión moderna con import con nombre
+import { jwtDecode } from 'jwt-decode';
+import { HeaderPublicoComponent } from '../../shared/header-publico/header-publico.component';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ import { jwtDecode } from 'jwt-decode';  // ✅ Versión moderna con import con 
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    HeaderPublicoComponent // ✅ Importación aquí
   ],
   templateUrl: './login.component.html'
 })
@@ -83,5 +85,13 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  irALogin() {
+    this.router.navigate(['/auth/login']);
+  }
+
+  irARegistro() {
+    this.router.navigate(['/auth/register']);
   }
 }
