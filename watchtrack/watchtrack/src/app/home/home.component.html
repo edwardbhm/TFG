@@ -1,52 +1,63 @@
 <app-header></app-header>
 
-
 <!-- Resultados de búsqueda -->
-<div *ngIf="searchResultsMovies.length || searchResultsSeries.length">
-  <h2>Resultados de películas</h2>
-  <div class="card-grid">
-    <mat-card *ngFor="let movie of searchResultsMovies" class="media-card" (click)="goToMovie(movie.id)">
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
-      <mat-card-title>{{ movie.title }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ movie.overview | slice:0:100 }}...</p>
-      </mat-card-content>
-    </mat-card>
+<div *ngIf="searchResultsMovies.length || searchResultsSeries.length" class="popular-container">
+  <div class="popular-section">
+    <h2>Resultados de películas</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let movie of searchResultsMovies" class="media-card" (click)="goToMovie(movie.id)">
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ movie.overview | slice:0:100 }}...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 
-  <h2>Resultados de series</h2>
-  <div class="card-grid">
-    <mat-card *ngFor="let series of searchResultsSeries" class="media-card" (click)="goToSeries(series.id)">
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}">
-      <mat-card-title>{{ series.name }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ series.overview | slice:0:100 }}...</p>
-      </mat-card-content>
-    </mat-card>
+  <div class="vertical-separator"></div>
+
+  <div class="popular-section">
+    <h2>Resultados de series</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let series of searchResultsSeries" class="media-card" (click)="goToSeries(series.id)">
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}">
+        <mat-card-title>{{ series.name }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ series.overview | slice:0:100 }}...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>
 
 <!-- Contenido popular solo si no hay resultados de búsqueda -->
-<div *ngIf="!searchResultsMovies.length && !searchResultsSeries.length">
-  <h2>Películas Populares</h2>
-  <div class="card-grid">
-    <mat-card *ngFor="let movie of popularMovies" class="media-card" (click)="goToMovie(movie.id)">
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
-      <mat-card-title>{{ movie.title }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ movie.overview | slice:0:100 }}...</p>
-      </mat-card-content>
-    </mat-card>
+<div *ngIf="!searchResultsMovies.length && !searchResultsSeries.length" class="popular-container">
+  <div class="popular-section">
+    <h2>Películas Populares</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let movie of popularMovies" class="media-card" (click)="goToMovie(movie.id)">
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ movie.overview | slice:0:100 }}...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 
-  <h2>Series Populares</h2>
-  <div class="card-grid">
-    <mat-card *ngFor="let series of popularSeries" class="media-card" (click)="goToSeries(series.id)">
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}">
-      <mat-card-title>{{ series.name }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ series.overview | slice:0:100 }}...</p>
-      </mat-card-content>
-    </mat-card>
+  <div class="vertical-separator"></div>
+
+  <div class="popular-section">
+    <h2>Series Populares</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let series of popularSeries" class="media-card" (click)="goToSeries(series.id)">
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" alt="{{ series.name }}">
+        <mat-card-title>{{ series.name }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ series.overview | slice:0:100 }}...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

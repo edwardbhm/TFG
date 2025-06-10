@@ -1,15 +1,35 @@
 h2 {
   text-align: center;
   margin-top: 30px;
-  font-size: 24px;
+  font-size: 40px;
   color: #333;
+}
+
+/* Contenedor dividido */
+.popular-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px 40px;
+}
+
+.popular-section {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+.vertical-separator {
+  width: 2px;
+  background-color: #ccc;
+  margin: 0 10px;
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
-  padding: 0 20px 40px;
+  margin-top: 20px;
 }
 
 .media-card {
@@ -34,4 +54,15 @@ mat-card-title {
 mat-card-content p {
   font-size: 14px;
   color: #444;
+}
+
+/* Opcional: Ocultar separador en pantallas pequeñas */
+@media (max-width: 900px) {
+  .popular-container {
+    flex-direction: column;
+  }
+
+  .vertical-separator {
+    display: none;
+  }
 }

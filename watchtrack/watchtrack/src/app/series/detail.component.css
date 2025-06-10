@@ -3,11 +3,9 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  
+
   .titulos {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 50px;
-    margin: 1rem 0 0 1rem;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   .detail-content {

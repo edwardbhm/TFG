@@ -3,17 +3,17 @@
 <div class="lista-container">
   <!-- Columna de Películas -->
   <div class="columna columna-peliculas">
-    <h2>🎬 Películas vistas</h2>
+    <h2>🕒 Películas pendientes</h2>
     <div class="grid">
-      <div *ngFor="let peli of vistas" class="card" (click)="verDetallePelicula(peli.pelicula.tmdbId)">
+      <div *ngFor="let peli of pendientes" class="card" (click)="verDetallePelicula(peli.pelicula.tmdbId)">
         <img [src]="'https://image.tmdb.org/t/p/w500' + peli.pelicula.imagen" alt="{{ peli.pelicula.titulo }}">
         <p>{{ peli.pelicula.titulo }}</p>
       </div>
     </div>
 
-    <h2>🕒 Películas pendientes</h2>
+    <h2>✅ Películas vistas</h2>
     <div class="grid">
-      <div *ngFor="let peli of pendientes" class="card" (click)="verDetallePelicula(peli.pelicula.tmdbId)">
+      <div *ngFor="let peli of vistas" class="card" (click)="verDetallePelicula(peli.pelicula.tmdbId)">
         <img [src]="'https://image.tmdb.org/t/p/w500' + peli.pelicula.imagen" alt="{{ peli.pelicula.titulo }}">
         <p>{{ peli.pelicula.titulo }}</p>
       </div>
@@ -22,15 +22,16 @@
 
   <!-- Columna de Series -->
   <div class="columna columna-series">
-    <h2>📺 Series vistas</h2>
+
+      <h2>📺 Series viendo</h2>
     <div class="grid">
-      <div *ngFor="let serie of vistasSeries" class="card" (click)="verDetalleSerie(serie.serie.tmdbId)">
+      <div *ngFor="let serie of viendoSeries" class="card" (click)="verDetalleSerie(serie.serie.tmdbId)">
         <img [src]="'https://image.tmdb.org/t/p/w500' + serie.serie.imagen" alt="{{ serie.serie.titulo }}">
         <p>{{ serie.serie.titulo }}</p>
       </div>
     </div>
-
-    <h2>🕒 Series pendientes</h2>
+    
+        <h2>🕒 Series pendientes</h2>
     <div class="grid">
       <div *ngFor="let serie of pendientesSeries" class="card" (click)="verDetalleSerie(serie.serie.tmdbId)">
         <img [src]="'https://image.tmdb.org/t/p/w500' + serie.serie.imagen" alt="{{ serie.serie.titulo }}">
@@ -38,9 +39,9 @@
       </div>
     </div>
 
-    <h2>📺 Series viendo</h2>
+    <h2>✅ Series vistas</h2>
     <div class="grid">
-      <div *ngFor="let serie of viendoSeries" class="card" (click)="verDetalleSerie(serie.serie.tmdbId)">
+      <div *ngFor="let serie of vistasSeries" class="card" (click)="verDetalleSerie(serie.serie.tmdbId)">
         <img [src]="'https://image.tmdb.org/t/p/w500' + serie.serie.imagen" alt="{{ serie.serie.titulo }}">
         <p>{{ serie.serie.titulo }}</p>
       </div>

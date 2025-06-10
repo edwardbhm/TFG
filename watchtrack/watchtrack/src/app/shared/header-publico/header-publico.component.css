@@ -7,8 +7,10 @@
   height: 64px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+  max-width: 100%; /* Igual que en el header principal */
 }
 
+/* Logo */
 .logo-text {
   font-weight: bold;
   font-size: xx-large;
@@ -16,7 +18,7 @@
   text-decoration: none;
 }
 
-/* Centrar texto "Bienvenido a WatchTrack" */
+/* Centrar mensaje de bienvenida */
 .welcome-text {
   position: absolute;
   left: 50%;
@@ -24,23 +26,35 @@
   font-size: 1.2rem;
   font-weight: 500;
   color: white;
+  white-space: nowrap;
 }
 
-/* Botones alineados */
+/* Botones "Iniciar sesión" y "Regístrate" */
 .auth-buttons {
   display: flex;
   gap: 0.75rem;
 }
 
-/* Contenido */
+.auth-buttons button {
+  white-space: nowrap;           /* evita salto de línea */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  font-weight: 500;
+}
+
+/* Contenido principal */
 .contenido-principal {
   padding: 2rem;
 }
 
+/* Títulos */
 h2 {
   margin-bottom: 1rem;
 }
 
+/* Grid de tarjetas */
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -48,6 +62,7 @@ h2 {
   justify-content: center;
 }
 
+/* Tarjetas */
 .card {
   width: 140px;
   text-align: center;

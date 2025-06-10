@@ -1,16 +1,20 @@
 <div class="header-bar">
   <span class="logo-text" (click)="goToHome()" style="cursor: pointer;">🎬 WatchTrack</span>
 
-  <!-- Buscador alineado a la derecha -->
-  <form (submit)="onSearch()" style="display: flex; align-items: center; gap: 10px; margin-left: auto;">
-    <mat-form-field appearance="outline" class="search-box">
-      <mat-label>Buscar</mat-label>
-      <input matInput [(ngModel)]="searchQuery" name="searchQuery">
-    </mat-form-field>
-    <button mat-icon-button color="primary" type="submit">
+  <!-- Buscador -->
+ <form (submit)="onSearch()" class="search-form">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    name="searchQuery"
+    placeholder="Buscar..."
+    class="search-input"
+  />
+  <button mat-icon-button color="primary" type="submit">
       <mat-icon>search</mat-icon>
     </button>
-  </form>
+</form>
+
 
   <!-- Menú de usuario -->
   <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-icon">

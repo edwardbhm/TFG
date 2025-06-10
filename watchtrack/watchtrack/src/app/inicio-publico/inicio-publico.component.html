@@ -1,27 +1,34 @@
 <app-header-publico></app-header-publico>
 
-<div class="contenido-principal">
-
-  <h2>Películas populares</h2>
-  <div class="card-grid">
-    <mat-card *ngFor="let peli of popularesPeliculas" class="media-card" (click)="irALogin()">
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + peli.poster_path" alt="{{ peli.title }}">
-      <mat-card-title>{{ peli.title }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ peli.overview | slice:0:100 }}...</p>
-      </mat-card-content>
-    </mat-card>
+<div class="popular-container">
+  <!-- Películas populares -->
+  <div class="popular-section">
+    <h2>Películas populares</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let peli of popularesPeliculas" class="media-card" (click)="irALogin()">
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + peli.poster_path" alt="{{ peli.title }}">
+        <mat-card-title>{{ peli.title }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ peli.overview | slice:0:100 }}...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 
-  <h2>Series populares</h2>
-  <div class="card-grid">
-    <mat-card *ngFor="let serie of popularesSeries" class="media-card" (click)="irALogin()">
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" alt="{{ serie.name }}">
-      <mat-card-title>{{ serie.name }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ serie.overview | slice:0:100 }}...</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <!-- Separador vertical -->
+  <div class="vertical-separator"></div>
 
+  <!-- Series populares -->
+  <div class="popular-section">
+    <h2>Series populares</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let serie of popularesSeries" class="media-card" (click)="irALogin()">
+        <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" alt="{{ serie.name }}">
+        <mat-card-title>{{ serie.name }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ serie.overview | slice:0:100 }}...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
