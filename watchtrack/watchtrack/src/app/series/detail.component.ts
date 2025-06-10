@@ -19,7 +19,6 @@ export class DetailComponent implements OnInit {
   userId: number | null = null;
   estadoActual: 'VISTA' | 'POR_VER' | 'VIENDO' | null = null;
   guardando: boolean = false;
-  mensajeConfirmacion: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +33,7 @@ export class DetailComponent implements OnInit {
       ? Number(localStorage.getItem('userId')) 
       : null;
 
-this.tmdbService.getSerieById(id.toString()).subscribe(data => {
+    this.tmdbService.getSerieById(id.toString()).subscribe(data => {
       this.series = data;
       this.genres = data.genres.map((g: any) => g.name).join(', ');
 
@@ -59,7 +58,6 @@ this.tmdbService.getSerieById(id.toString()).subscribe(data => {
         console.log(`✅ Serie marcada como ${estado}:`, res);
         this.estadoActual = estado;
         this.guardando = false;
-        window.location.reload(); // solo aquí
       },
       error: (error) => {
         console.error(`❌ Error real al guardar serie como ${estado}:`, error);
@@ -69,32 +67,28 @@ this.tmdbService.getSerieById(id.toString()).subscribe(data => {
         this.guardando = false;
       }
     });
-    window.location.reload();
-}
 
-
-  eliminarSerie() {
-  if (!this.userId || !this.series?.id) return;
-
-  this.guardando = true;
-
-  this.usuarioSerieService.eliminarSerie(this.userId, this.series.id).subscribe({
-    next: (res) => {
-      console.log('✅ Serie eliminada correctamente:', res);
-      this.estadoActual = null;
-      this.guardando = false;
-      window.location.reload();
-    },
-    error: (error) => {
-      console.error('❌ Error real al eliminar serie:', error);
-      if (error?.message && error.message !== 'Error al eliminar serie') {
-        alert('Error al eliminar de la lista');
-      }
-      this.guardando = false;
-    }
-  });
   window.location.reload();
 }
+
+  eliminarSerie() {
+    if (!this.userId || !this.series?.id) return;
+
+    this.guardando = true;
+
+    this.usuarioSerieService.eliminarSerie(this.userId, this.series.id).subscribe({
+      next: (res) => {
+        console.log('✅ Serie eliminada correctamente:', res);
+        this.estadoActual = null;
+        this.guardando = false;
+      },
+      error: (error) => {
+        console.error('❌ Error al eliminar serie:', error);
+        alert('Error al eliminar de la lista');
+        this.guardando = false;
+      }
+    });
+  }
 
   goBack(): void {
     this.router.navigate(['/home']);
