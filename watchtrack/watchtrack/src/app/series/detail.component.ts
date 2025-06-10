@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TmdbService } from '../services/tmdb.service';
 import { UsuarioSerieService } from '../services/usuario-serie.service';
 import { HeaderComponent } from '../header/header.component';
 import { MatButtonModule } from '@angular/material/button';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-series-detail',
@@ -22,9 +23,9 @@ export class DetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private tmdbService: TmdbService,
-    private usuarioSerieService: UsuarioSerieService
+    private usuarioSerieService: UsuarioSerieService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -47,57 +48,52 @@ export class DetailComponent implements OnInit {
   }
 
   guardarEstado(estado: 'VISTA' | 'POR_VER' | 'VIENDO') {
-  if (!this.userId || !this.series?.id) return;
+    if (!this.userId || !this.series?.id) return;
 
-  this.guardando = true;
+    this.guardando = true;
 
-  this.usuarioSerieService
-    .guardarSerie(this.userId, this.series, estado)
-    .subscribe({
+    this.usuarioSerieService
+      .guardarSerie(this.userId, this.series, estado)
+      .subscribe({
+        next: (res) => {
+          console.log(`✅ Serie marcada como ${estado}:`, res);
+          this.estadoActual = estado;
+          this.guardando = false;
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error(`❌ Error real al guardar serie como ${estado}:`, error);
+          if (error?.message && error.message !== 'Error al guardar serie') {
+            alert(`Error al guardar como ${estado.toLowerCase()}`);
+          }
+          this.guardando = false;
+        }
+      });
+  }
+
+  eliminarSerie() {
+    if (!this.userId || !this.series?.id) return;
+
+    this.guardando = true;
+
+    this.usuarioSerieService.eliminarSerie(this.userId, this.series.id).subscribe({
       next: (res) => {
-        console.log(`✅ Serie marcada como ${estado}:`, res);
-        this.estadoActual = estado;
+        console.log('✅ Serie eliminada correctamente:', res);
+        this.estadoActual = null;
         this.guardando = false;
+        window.location.reload();
       },
       error: (error) => {
-        console.error(`❌ Error real al guardar serie como ${estado}:`, error);
-        if (error?.message && error.message !== 'Error al guardar serie') {
-          alert(`Error al guardar como ${estado.toLowerCase()}`);
+        console.error('❌ Error real al eliminar serie:', error);
+        if (error?.message && error.message !== 'Error al eliminar serie') {
+          alert('Error al eliminar de la lista');
         }
         this.guardando = false;
       }
     });
-
-  window.location.reload();
-}
-
-  eliminarSerie() {
-  if (!this.userId || !this.series?.id) return;
-
-  this.guardando = true;
-
-  this.usuarioSerieService.eliminarSerie(this.userId, this.series.id).subscribe({
-    next: (res) => {
-      console.log('✅ Serie eliminada correctamente:', res);
-      this.estadoActual = null;
-      this.guardando = false;
-      location.reload(); // recarga para reflejar el cambio en el botón
-    },
-    error: (error) => {
-      console.error('❌ Error real al eliminar serie:', error);
-      if (error?.message && error.message !== 'Error al eliminar serie') {
-        alert('Error al eliminar de la lista');
-      }
-      this.guardando = false;
-    }
-  });
-
-  window.location.reload();
-}
-
-
+  }
 
   goBack(): void {
-    this.router.navigate(['/home']);
+    this.location.back(); // ← Vuelve exactamente a la página anterior
   }
 }

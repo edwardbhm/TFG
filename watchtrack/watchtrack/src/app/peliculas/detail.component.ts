@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
 import { TmdbService } from '../services/tmdb.service';
 import { UsuarioPeliculaService } from '../services/usuario-pelicula.service';
 import { HeaderComponent } from '../header/header.component';
@@ -25,13 +25,13 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private tmdbService: TmdbService,
     private usuarioPeliculaService: UsuarioPeliculaService,
-    private router: Router
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.userId = (typeof window !== 'undefined' && localStorage.getItem('userId')) 
-      ? Number(localStorage.getItem('userId')) 
+    this.userId = (typeof window !== 'undefined' && localStorage.getItem('userId'))
+      ? Number(localStorage.getItem('userId'))
       : null;
 
     this.tmdbService.getMovieDetail(id).subscribe(data => {
@@ -48,57 +48,52 @@ export class DetailComponent implements OnInit {
   }
 
   guardarEstado(estado: 'VISTA' | 'POR_VER') {
-  if (!this.userId || !this.movie?.id) return;
+    if (!this.userId || !this.movie?.id) return;
 
-  this.guardando = true;
+    this.guardando = true;
 
-  this.usuarioPeliculaService
-    .guardarPelicula(this.userId, this.movie, estado)
-    .subscribe({
+    this.usuarioPeliculaService
+      .guardarPelicula(this.userId, this.movie, estado)
+      .subscribe({
+        next: (res) => {
+          console.log(`✅ Película marcada como ${estado}:`, res);
+          this.estadoActual = estado;
+          this.guardando = false;
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error(`❌ Error real al guardar película como ${estado}:`, error);
+          if (error?.message && error.message !== 'Error al guardar película') {
+            alert(`Error al guardar como ${estado === 'VISTA' ? 'vista' : 'pendiente'}`);
+          }
+          this.guardando = false;
+        }
+      });
+  }
+
+  eliminarDeLista() {
+    if (!this.userId || !this.movie?.id) return;
+
+    this.guardando = true;
+
+    this.usuarioPeliculaService.eliminarPelicula(this.userId, this.movie.id).subscribe({
       next: (res) => {
-        console.log(`✅ Película marcada como ${estado}:`, res);
-        this.estadoActual = estado;
+        console.log('✅ Película eliminada correctamente:', res);
+        this.estadoActual = null;
         this.guardando = false;
-
-       
+        window.location.reload();
       },
       error: (error) => {
-        console.error(`❌ Error real al guardar película como ${estado}:`, error);
-        if (error?.message && error.message !== 'Error al guardar película') {
-          alert(`Error al guardar como ${estado === 'VISTA' ? 'vista' : 'pendiente'}`);
+        console.error('❌ Error real al eliminar película:', error);
+        if (error?.message && error.message !== 'Error al eliminar película') {
+          alert('Error al eliminar de la lista');
         }
         this.guardando = false;
       }
     });
-        window.location.reload();
-}
+  }
 
-
-eliminarDeLista() {
-  if (!this.userId || !this.movie?.id) return;
-
-  this.guardando = true;
-
-  this.usuarioPeliculaService.eliminarPelicula(this.userId, this.movie.id).subscribe({
-    next: (res) => {
-      console.log('✅ Película eliminada correctamente:', res);
-      this.estadoActual = null;
-      this.guardando = false;
-      location.reload(); // recarga para reflejar el cambio en el botón
-    },
-    error: (error) => {
-      console.error('❌ Error real al eliminar película:', error);
-      if (error?.message && error.message !== 'Error al eliminar película') {
-        alert('Error al eliminar de la lista');
-      }
-      this.guardando = false;
-    }
-  });
-  window.location.reload();
-}
-
-        
   goBack(): void {
-    this.router.navigate(['/home']);
+    this.location.back(); // ← vuelve a la página anterior exacta
   }
 }
