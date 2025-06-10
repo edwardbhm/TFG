@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
 import { HeaderPublicoComponent } from '../../shared/header-publico/header-publico.component';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
@@ -23,13 +24,17 @@ import { HeaderPublicoComponent } from '../../shared/header-publico/header-publi
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    HeaderPublicoComponent
+    HeaderPublicoComponent,
+    MatIcon
   ],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   message = '';
+
+  hidePassword: boolean = true; // 👁️ Para contraseña
+  hideConfirmPassword: boolean = true; // 👁️ Para confirmar
 
   constructor(
     private fb: FormBuilder,

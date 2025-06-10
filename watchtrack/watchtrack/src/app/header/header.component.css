@@ -62,3 +62,14 @@
   font-size: 18px;
   height: 36px;
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  height: 75px;
+  width: auto;
+}

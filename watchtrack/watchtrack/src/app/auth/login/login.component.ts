@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
 import { HeaderPublicoComponent } from '../../shared/header-publico/header-publico.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -22,14 +23,15 @@ import { HeaderPublicoComponent } from '../../shared/header-publico/header-publi
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    HeaderPublicoComponent // ✅ Importación aquí
+    HeaderPublicoComponent,
+    MatIcon
   ],
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   message = '';
+  hidePassword: boolean = true; // 👁️ Nueva propiedad para alternar visibilidad
 
   constructor(
     private fb: FormBuilder,

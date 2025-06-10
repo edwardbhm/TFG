@@ -68,7 +68,8 @@ export class DetailComponent implements OnInit {
           }
           this.guardando = false;
         }
-      });
+      });          window.location.reload();
+
   }
 
   eliminarSerie() {
@@ -90,7 +91,8 @@ export class DetailComponent implements OnInit {
         }
         this.guardando = false;
       }
-    });
+    });          window.location.reload();
+
   }
 
   goBack(): void {

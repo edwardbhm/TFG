@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from '../header/header.component';
 import { PerfilService } from '../services/perfil.service';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-perfil',
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    HeaderComponent
+    HeaderComponent,
+    MatIcon
   ]
 })
 export class PerfilComponent implements OnInit {
@@ -32,6 +34,10 @@ export class PerfilComponent implements OnInit {
   nuevaContrasena: string = '';
 confirmarContrasena: string = '';
 mostrarFormularioContrasena = false;
+
+hideNuevaContrasena: boolean = true;
+hideConfirmarContrasena: boolean = true;
+
 
 
   constructor(private fb: FormBuilder, private perfilService: PerfilService) {}

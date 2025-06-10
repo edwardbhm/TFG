@@ -78,3 +78,14 @@ h2 {
 .card img:hover {
   transform: scale(1.05);
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  height: 75px;
+  width: auto;
+}
