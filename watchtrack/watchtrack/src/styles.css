@@ -6,17 +6,16 @@
   }
   
   html, body {
-    height: 100%;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    background-image: url('/assets/rollo.png');
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    background-size: 40%;
-    background-attachment: fixed;
-  }
+  background-image: url('/assets/images/fondo.png');
+  background-size: cover; /* ajusta para cubrir toda la pantalla */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* permanece al hacer scroll */
+  min-height: 100vh;
+  margin: 0;
+  font-family: Roboto, sans-serif; /* o el que uses */
+}
+
   
   /* Centrado de las tarjetas (formularios) */
   .center-card {
