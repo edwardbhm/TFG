@@ -72,23 +72,30 @@ export class DetailComponent implements OnInit {
 }
 
   eliminarSerie() {
-    if (!this.userId || !this.series?.id) return;
+  if (!this.userId || !this.series?.id) return;
 
-    this.guardando = true;
+  this.guardando = true;
 
-    this.usuarioSerieService.eliminarSerie(this.userId, this.series.id).subscribe({
-      next: (res) => {
-        console.log('✅ Serie eliminada correctamente:', res);
-        this.estadoActual = null;
-        this.guardando = false;
-      },
-      error: (error) => {
-        console.error('❌ Error al eliminar serie:', error);
+  this.usuarioSerieService.eliminarSerie(this.userId, this.series.id).subscribe({
+    next: (res) => {
+      console.log('✅ Serie eliminada correctamente:', res);
+      this.estadoActual = null;
+      this.guardando = false;
+      location.reload(); // recarga para reflejar el cambio en el botón
+    },
+    error: (error) => {
+      console.error('❌ Error real al eliminar serie:', error);
+      if (error?.message && error.message !== 'Error al eliminar serie') {
         alert('Error al eliminar de la lista');
-        this.guardando = false;
       }
-    });
-  }
+      this.guardando = false;
+    }
+  });
+
+  window.location.reload();
+}
+
+
 
   goBack(): void {
     this.router.navigate(['/home']);
